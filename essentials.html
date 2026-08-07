@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0D1B2A">
+  <meta name="description" content="תחבורה, תשלום, מזג אוויר וחירום בטאלין">
+  <title>מידע שימושי ועזרה | טאלין</title>
+  <link rel="icon" href="assets/images/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/css/styles.css?v=4">
+  <script src="assets/js/app.js?v=4" defer></script>
+</head>
+<body class="essentials-page" data-page="essentials.html">
+<a class="skip-link" href="#main">דלג לתוכן</a>
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><span class="brand-copy"><strong>TALLINN</strong></span></a>
+  <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="פתיחת תפריט"><span></span><span></span><span></span></button>
+  <nav class="site-nav" id="siteNav" aria-label="ניווט ראשי">
+    <a class="nav-link" href="index.html"><img class="nav-icon" src="assets/icons/home.svg" alt=""><span>בית</span></a>
+    <a class="nav-link" href="must-see.html"><img class="nav-icon" src="assets/icons/star.svg" alt=""><span>חובה לראות</span></a>
+    <a class="nav-link" href="routes.html"><img class="nav-icon" src="assets/icons/route.svg" alt=""><span>מסלולים</span></a>
+    <a class="nav-link" href="food.html"><img class="nav-icon" src="assets/icons/food.svg" alt=""><span>אוכל</span></a>
+    <a class="nav-link active" href="essentials.html"><img class="nav-icon" src="assets/icons/info.svg" alt=""><span>מידע שימושי</span></a>
+    <a class="nav-link" href="about.html"><img class="nav-icon" src="assets/icons/heart.svg" alt=""><span>על המדריך</span></a>
+  </nav>
+</header>
+<div class="menu-backdrop" id="menuBackdrop" hidden></div>
+
+<main id="main" class="page-shell">
+  <section class="page-hero compact visual-hero hero-useful"><div class="page-hero-copy"><span class="eyebrow">כל מה שצריך ברגע הנכון</span><h1>מידע שימושי</h1><p>תחבורה, תשלום, מזג אוויר, אירועים ומספרים חשובים — במקום אחד.</p></div></section>
+
+  <section class="section">
+    <div class="utility-grid">
+      <article class="utility-card featured" id="transport"><div class="utility-icon"><img class="icon" src="assets/icons/bus.svg" alt=""></div><div><h2>תחבורה ציבורית</h2><p>עולים לאוטובוס, לחשמלית או לטרוליבוס ומצמידים כרטיס אשראי או אמצעי תשלום ללא מגע למכשיר התיקוף שבדלת הקדמית. משתמשים באותו כרטיס או מכשיר בכל הנסיעות כדי שהמערכת תחשב את התקרה היומית. אין אפשרות לקנות כרטיס במזומן בתוך כלי התחבורה.</p><div class="button-row"><a class="btn btn-secondary btn-small" href="https://www.tallinn.ee/en/pilet/ticket-information-tourists" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">מידע לתיירים</a><a class="btn btn-secondary btn-small" href="https://www.tallinn.ee/en/pilet/how-buy-ticket" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">איך משלמים</a></div></div></article>
+      <article class="utility-card"><div class="utility-icon"><img class="icon" src="assets/icons/pin.svg" alt=""></div><div><h2>Bolt, Forus, Uber ומוניות</h2><p>Bolt היא אפשרות נפוצה ונוחה בטאלין, ולצדה פועלות גם Forus ו־Uber. באפליקציה רואים מראש את נקודת האיסוף, היעד והמחיר המשוער.</p><div class="button-row"><a class="btn btn-secondary btn-small" href="https://bolt.eu/en/cities/tallinn/" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">Bolt בטאלין</a><a class="btn btn-secondary btn-small" href="https://visittallinn.ee/eng/visitor/plan/transport/taxi" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">מוניות רשמיות</a></div></div></article>
+      <article class="utility-card"><div class="utility-icon"><img class="icon" src="assets/icons/wallet.svg" alt=""></div><div><h2>תשלום</h2><p>המטבע הוא אירו. תשלום בכרטיס ובטלפון נפוץ מאוד במסעדות, חנויות, מוזיאונים ותחבורה ציבורית.</p></div></article>
+    </div>
+  </section>
+
+  <section class="section" id="weather">
+    <div class="weather-panel">
+      <div class="weather-panel-header"><div class="utility-icon"><img class="icon" src="assets/icons/weather.svg" alt=""></div><div><h2>תחזית ל־3 ימים בטאלין</h2><p>עדכון חי ללא בקשת מיקום מהמכשיר</p></div></div>
+      <div class="weather-forecast" id="weatherForecast" aria-live="polite" aria-busy="true"><article><strong>טוען</strong><span>תחזית עדכנית</span></article><article><strong>טוען</strong><span>תחזית עדכנית</span></article><article><strong>טוען</strong><span>תחזית עדכנית</span></article></div>
+      <p class="weather-source">נתוני התחזית: Open-Meteo. לתחזית מפורטת בעברית או לאזהרות רשמיות:</p>
+      <div class="button-row"><a class="btn btn-secondary btn-small" href="https://www.accuweather.com/he/ee/tallinn/127964/weather-forecast/127964" target="_blank" rel="noopener"><img class="icon" src="assets/icons/weather.svg" alt="">תחזית בעברית</a><a class="btn btn-secondary btn-small" href="https://www.ilmateenistus.ee/ilm/prognoosid/hoiatused/?lang=en" target="_blank" rel="noopener"><img class="icon" src="assets/icons/umbrella.svg" alt="">אזהרות רשמיות</a></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="events-title">
+    <div class="section-heading"><div><span class="section-kicker">בתאריכי הנסיעה</span><h2 id="events-title">אירועים שיכולים להשפיע על היום</h2></div></div>
+    <article class="event-card"><span><img class="icon" src="assets/icons/star.svg" alt=""></span><div><h2>20 באוגוסט · יום העצמאות המחודשת</h2><p>זהו חג לאומי באסטוניה. התחבורה הציבורית פועלת, אבל שעות הפתיחה של מוזיאונים, מסעדות וחנויות עשויות להשתנות. לפני מקום בתשלום כדאי לבדוק את האתר הרשמי.</p><a class="btn btn-secondary btn-small" href="https://www.visittallinn.ee/eng/visitor/plan/good-to-know/practical-information" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">מידע רשמי</a></div></article>
+    <article class="event-card ironman"><span><img class="icon" src="assets/icons/ticket.svg" alt=""></span><div><h2>שבוע IRONMAN Tallinn</h2><p>המירוץ מתקיים ב־22 באוגוסט 2026. במהלך סוף השבוע צפויים שינויים זמניים בתנועה, בתחבורה הציבורית ובגישה לחלק מהרחובות.</p><div class="button-row"><a class="btn btn-secondary btn-small" href="https://www.ironman.com/races/im-tallinn" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">אתר המירוץ</a><a class="btn btn-secondary btn-small" href="https://www.ironman.com/races/im-tallinn/schedule" target="_blank" rel="noopener"><img class="icon" src="assets/icons/clock.svg" alt="">לוח האירועים</a></div></div></article>
+  </section>
+
+  <section class="section" id="emergency">
+    <div class="section-heading"><div><span class="section-kicker">במקרה הצורך</span><h2>חירום ועזרה</h2><p>המספרים והקישורים החשובים.</p></div></div>
+    <div class="emergency-hero"><div><span class="emergency-number">112</span><h3>משטרה · אמבולנס · כיבוי אש</h3><p>מספר החירום האירופי, חינם מכל טלפון.</p></div><div class="emergency-actions"><a class="btn btn-light" href="tel:112"><img class="icon" src="assets/icons/phone.svg" alt="">חיוג 112</a></div></div>
+    <div class="emergency-grid">
+      <article class="emergency-card"><div class="utility-icon"><img class="icon" src="assets/icons/info.svg" alt=""></div><h2>קו המידע הממשלתי</h2><p>מידע ציבורי שאינו מצב חירום, 24/7, באסטונית, רוסית ואנגלית.</p><a class="btn btn-secondary" href="tel:1247"><img class="icon" src="assets/icons/phone.svg" alt="">חיוג 1247</a></article>
+      <article class="embassy-card"><div class="embassy-title"><span><img class="icon" src="assets/icons/building.svg" alt=""></span><div><span class="section-kicker">נציגות ישראלית</span><h2>שגרירות ישראל בטאלין</h2></div></div><dl><dt>כתובת</dt><dd dir="ltr">Maakri tn 19/1, Tallinn</dd><dt>טלפון</dt><dd><a dir="ltr" href="tel:+3726258500">+372 625 8500</a></dd><dt>דוא״ל</dt><dd><a dir="ltr" href="mailto:info@tallinn.mfa.gov.il">info@tallinn.mfa.gov.il</a></dd></dl><div class="button-row"><a class="btn btn-light btn-small" href="tel:+3726258500"><img class="icon" src="assets/icons/phone.svg" alt="">חיוג</a><a class="btn btn-map btn-small" href="https://www.google.com/maps/search/?api=1&query=Embassy%20of%20Israel%20Maakri%2019%20Tallinn" target="_blank" rel="noopener"><img class="icon" src="assets/icons/map.svg" alt="">מפה</a><a class="btn btn-outline-light btn-small" href="https://embassies.gov.il/estonia/he" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">אתר</a></div></article>
+    </div>
+  </section>
+
+  <section class="section" id="official-links"><div class="soft-panel"><h2>קישורים רשמיים שימושיים</h2><p>הכרטיסים מציגים הקשר; רק כפתור הפעולה פותח אתר חיצוני.</p><div class="official-link-list">
+    <article class="official-link-item"><span><img class="icon" src="assets/icons/star.svg" alt=""></span><div><h3>Visit Tallinn</h3><p>מידע תיירותי רשמי על העיר.</p></div><a class="btn btn-secondary btn-small" href="https://visittallinn.ee/eng/visitor" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">פתיחה</a></article>
+    <article class="official-link-item"><span><img class="icon" src="assets/icons/building.svg" alt=""></span><div><h3>City of Tallinn</h3><p>שירותים עירוניים ותחבורה.</p></div><a class="btn btn-secondary btn-small" href="https://www.tallinn.ee/en" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">פתיחה</a></article>
+    <article class="official-link-item"><span><img class="icon" src="assets/icons/weather.svg" alt=""></span><div><h3>Estonian Weather Service</h3><p>תחזית ואזהרות רשמיות.</p></div><a class="btn btn-secondary btn-small" href="https://www.ilmateenistus.ee/?lang=en" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">פתיחה</a></article>
+    <article class="official-link-item"><span><img class="icon" src="assets/icons/ticket.svg" alt=""></span><div><h3>IRONMAN Tallinn</h3><p>עדכונים רשמיים למירוץ.</p></div><a class="btn btn-secondary btn-small" href="https://www.ironman.com/races/im-tallinn" target="_blank" rel="noopener"><img class="icon" src="assets/icons/external.svg" alt="">פתיחה</a></article>
+  </div></div></section>
+</main>
+
+<footer class="site-footer"><div><strong>TALLINN</strong><span>אוגוסט 2026</span></div><div class="footer-links"><a href="offline.html">הורדות לשימוש בלי אינטרנט</a></div></footer>
+<nav class="bottom-bar" aria-label="ניווט מהיר"><a href="index.html" class="bottom-action"><img class="bottom-icon" src="assets/icons/home.svg" alt=""><span>בית</span></a><a href="must-see.html" class="bottom-action"><img class="bottom-icon" src="assets/icons/star.svg" alt=""><span>חובה</span></a><a href="routes.html" class="bottom-action"><img class="bottom-icon" src="assets/icons/route.svg" alt=""><span>מסלולים</span></a><a href="essentials.html" class="bottom-action active"><img class="bottom-icon" src="assets/icons/info.svg" alt=""><span>מידע</span></a><button class="bottom-action" id="backToTop" type="button"><img class="bottom-icon" src="assets/icons/arrow-up.svg" alt=""><span>למעלה</span></button></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

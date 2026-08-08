@@ -3,7 +3,7 @@
   const button = document.getElementById('menuButton');
   const nav = document.getElementById('siteNav');
   const backdrop = document.getElementById('menuBackdrop');
-  const topButton = document.getElementById('backToTop');
+  let topButton = document.getElementById('backToTop');
   const toast = document.getElementById('toast');
 
   const icon = (name, className = 'icon') => {
@@ -14,6 +14,18 @@
     image.setAttribute('aria-hidden', 'true');
     return image;
   };
+
+  if (!topButton) {
+    topButton = document.createElement('button');
+    topButton.id = 'backToTop';
+    topButton.className = 'floating-control back-to-top';
+    topButton.type = 'button';
+    topButton.tabIndex = -1;
+    topButton.setAttribute('aria-label', 'חזרה לראש העמוד');
+    topButton.setAttribute('aria-hidden', 'true');
+    topButton.append(icon('arrow-up'));
+    document.body.append(topButton);
+  }
 
   const addSharedNavigation = () => {
     const brand = document.querySelector('.brand');
@@ -81,6 +93,10 @@
       header?.classList.toggle('compact', next);
       compact = next;
     }
+    const showTop = scrollY > 420;
+    topButton?.classList.toggle('visible', showTop);
+    topButton?.setAttribute('aria-hidden', String(!showTop));
+    if (topButton) topButton.tabIndex = showTop ? 0 : -1;
   };
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -109,14 +125,6 @@
     say('הועתק ללוח');
   }));
 
-  document.querySelectorAll('[data-route-toggle]').forEach((toggle) => toggle.addEventListener('click', () => {
-    const section = toggle.closest('.route-section');
-    if (!section) return;
-    const open = toggle.dataset.routeToggle === 'open';
-    section.querySelectorAll('details.stop-card, details.micro-accordion').forEach((details) => { details.open = open; });
-    say(open ? 'כל התחנות נפתחו' : 'כל התחנות נסגרו');
-  }));
-
   const stopEnhancements = {
     'r1-s01': ['Lossi plats 10, Tallinn', 'הקתדרלה נבנתה בשנים 1894–1900 בסגנון התחייה הרוסית, ובראשה חמש כיפות ובמגדליה אחד־עשר פעמונים. המיקום מול טירת טומפאה מדגיש היטב את המתח ההיסטורי בין השלטון הרוסי לבין העצמאות האסטונית.'],
     'r1-s02': ['Toom-Kooli 6, Tallinn', 'זוהי הכנסייה העתיקה ביותר בעיר העליונה, ושורשיה מגיעים למאה ה־13. בפנים בולטים מצבות עתיקות וסמלי אצולה רבים, שמספרים מי החזיק בכוח בטומפאה לאורך הדורות.'],
@@ -136,8 +144,8 @@
     'r2-s05': ['Kursi 5, Tallinn', 'המוזיאון העצמאי מציג אמנות אסטונית ובינלאומית עכשווית בחלל תעשייתי מחוספס. התערוכות מתחלפות, ולכן כדאי לבדוק מראש מה מוצג; הכניסה כיום חופשית בשעות הפעילות.'],
     'r2-s06': ['Kalasadama 4, Tallinn', 'האולם נבנה לקראת תחרויות השיט של אולימפיאדת מוסקבה 1980. הצורה הנמוכה והמדורגת תוכננה כחלק מן הנוף, וכיום המבנה הסגור מרתק בעיקר כשריד אדריכלי — אין להיכנס לאזורים חסומים.'],
     'r2-s07': ['Logi 4/2, Tallinn', 'גג טרמינל הקרוזים הוא טיילת ציבורית באורך כ־850 מטר עם ישיבה, משחק ומבט פתוח לנמל. הוא פתוח לקהל ללא תשלום וממחיש כיצד תשתית נמל פעילה יכולה לשמש גם כמרחב עירוני.'],
-    'r3-s01': ['A. Weizenbergi 33, Tallinn', 'הפארק נוסד ב־1718 סביב ארמון הקיץ של פיוטר הגדול והוא מכלול הבארוק הגדול באסטוניה. השבילים עוברים בין תכנון פורמלי לאזורים טבעיים יותר, ולכן לא צריך למהר ישר אל הארמון.'],
-    'r3-s02': ['A. Weizenbergi 33, Tallinn', 'בריכת הברבורים היא נקודת ההתמצאות הקלאסית של הפארק, עם ביתן, ערוגות ועצים ותיקים. ממנה נפתח הציר אל הארמון, והיא טובה לעצירה קצרה לפני החלק האדריכלי של המסלול.'],
+    'r3-s01': ['Narva maantee 63, Tallinn', 'הפארק נוסד ב־1718 סביב ארמון הקיץ של פיוטר הגדול והוא מכלול הבארוק הגדול באסטוניה. השבילים עוברים בין תכנון פורמלי לאזורים טבעיים יותר, ולכן לא צריך למהר ישר אל הארמון.'],
+    'r3-s02': ['Luigetiik, A. Weizenbergi 33, Tallinn', 'בריכת הברבורים היא נקודת ההתמצאות הקלאסית של הפארק, עם ביתן, ערוגות ועצים ותיקים. ממנה נפתח הציר אל הארמון, והיא טובה לעצירה קצרה לפני החלק האדריכלי של המסלול.'],
     'r3-s03': ['A. Weizenbergi 37, Tallinn', 'פיוטר הגדול יזם את הארמון ב־1718 עבור יקטרינה הראשונה, והחזית והגן שמאחור משקפים תכנון בארוקי רשמי. בפנים פועל מוזיאון לאמנות זרה; למי שנכנס, כדאי לחשב לפחות שעה נוספת.'],
     'r3-s04': ['A. Weizenbergi 39, Tallinn', 'הבניין הושלם ב־1938 ונועד מלכתחילה למוסד הנשיאותי. החזית שלו מהדהדת במכוון את הארמון הסמוך, כך ששני מבנים מתקופות שונות נראים כחלק מציר שלטוני אחד.'],
     'r3-s05': ['A. Weizenbergi 34, Tallinn', 'Kumu נפתח ב־2006 ותוכנן בידי האדריכל הפיני Pekka Vapaavuori כחלק מקשת החפורה במדרון. האוסף עוקב אחר אמנות אסטונית מן המאה ה־18 ועד ימינו, עם דגש חשוב על תקופת הכיבוש הסובייטי.'],
@@ -150,52 +158,77 @@
 
   const enhanceRoutes = () => {
     document.querySelectorAll('.route-section').forEach((section) => {
-      const label = section.querySelector('.sticky-route-label');
-      const cover = section.querySelector('.route-cover');
-      if (label && cover) {
-        label.classList.add('route-context-label');
-        cover.after(label);
-      }
+      section.querySelector('.sticky-route-label')?.remove();
     });
 
     Object.entries(stopEnhancements).forEach(([id, [address, text]]) => {
       const stop = document.getElementById(id);
+      const summary = stop?.querySelector(':scope > summary');
+      const copy = summary?.querySelector('.stop-summary-copy');
       const body = stop?.querySelector('.stop-body');
-      if (!body) return;
+      if (!summary || !copy || !body) return;
+
+      const tags = [...copy.querySelectorAll(':scope > .stop-tag')];
+      if (tags.length) {
+        const tagRow = document.createElement('div');
+        tagRow.className = 'stop-tag-row';
+        tags.forEach((tag) => tagRow.append(tag));
+        copy.prepend(tagRow);
+      }
+
+      const visitLine = document.createElement('div');
+      visitLine.className = 'stop-visit-line';
+      const index = summary.querySelector(':scope > .stop-index');
+      const duration = summary.querySelector(':scope > .stop-time');
+      if (index) visitLine.append(index);
+      if (duration) visitLine.append(duration);
+      const heading = copy.querySelector('h3');
+      copy.insertBefore(visitLine, heading || copy.firstChild);
 
       const addressLine = document.createElement('p');
-      addressLine.className = 'place-address';
+      addressLine.className = 'place-address stop-summary-address';
       addressLine.append(icon('pin'), document.createTextNode(address));
-      const notice = body.querySelector('.notice-box');
-      (notice || body.firstElementChild)?.insertAdjacentElement('afterend', addressLine);
+      copy.append(addressLine);
 
       const more = document.createElement('details');
       more.className = 'place-more';
-      const summary = document.createElement('summary');
-      summary.textContent = 'עוד על המקום';
+      const moreSummary = document.createElement('summary');
+      moreSummary.textContent = 'עוד על המקום';
       const paragraph = document.createElement('p');
       paragraph.textContent = text;
-      more.append(summary, paragraph);
-      const next = body.querySelector('.next-leg');
-      body.insertBefore(more, next || body.querySelector('.stop-actions'));
+      more.append(moreSummary, paragraph);
 
       const actions = body.querySelector('.stop-actions');
+      const lead = body.querySelector('.stop-lead');
+      const notice = body.querySelector('.notice-box');
+      const next = body.querySelector('.next-leg');
       actions?.querySelectorAll('.btn').forEach((action) => action.classList.add('btn-small'));
       const map = actions?.querySelector('.btn-map');
       if (map) map.replaceChildren(icon('map'), document.createTextNode('הצג במפה'));
+      actions?.classList.add('practical-actions');
+      if (lead && actions) lead.after(actions);
+      if (actions && notice) actions.after(notice);
+      else if (lead && notice) lead.after(notice);
+      if (notice) notice.after(more);
+      else if (actions) actions.after(more);
+      else if (lead) lead.after(more);
+      if (next) {
+        next.querySelector(':scope > span')?.remove();
+        more.after(next);
+      }
     });
 
     const optionalPlaces = {
-      'Kiek in de Kök ומנהרות הבסטיון': ['Komandandi tee 2, Tallinn', 'Kiek in de Kök Tallinn'],
-      'Vabamu': ['Toompea 8b, Tallinn', 'Vabamu Tallinn'],
-      'מגדל סנט אולף': ['Lai 50, Tallinn', 'St Olaf Church Tallinn'],
-      'מרכז האמנות Kai': ['Peetri 12, Tallinn', 'Kai Art Center Tallinn'],
-      'Reval Café בלנוסדאם': ['Vesilennuki 6, Tallinn', 'Reval Cafe Lennusadam Tallinn'],
-      'מוזיאון האמנות בארמון קדיאורג': ['A. Weizenbergi 37, Tallinn', 'Kadriorg Art Museum Tallinn'],
-      'Song Festival Grounds': ['Narva mnt 95, Tallinn', 'Tallinn Song Festival Grounds'],
-      'מוזיאון ההיסטוריה בארמון': ['Pirita tee 56, Tallinn', 'Maarjamae Palace Tallinn'],
-      'בית הקפה בארמון': ['Pirita tee 56, Tallinn', 'Maarjamae Palace Cafe Tallinn'],
-      'המשך לפיריטה': ['Pirita promenade, Tallinn', 'Pirita Promenade Tallinn']
+      'Kiek in de Kök ומנהרות הבסטיון': ['Komandandi tee 2, Tallinn'],
+      'Vabamu': ['Toompea 8b, Tallinn'],
+      'מגדל סנט אולף': ['Lai 50, Tallinn'],
+      'מרכז האמנות Kai': ['Peetri 12, Tallinn'],
+      'Reval Café בלנוסדאם': ['Vesilennuki 6, Tallinn'],
+      'מוזיאון האמנות בארמון קדיאורג': ['A. Weizenbergi 37, Tallinn'],
+      'Song Festival Grounds': ['Narva mnt 95, Tallinn'],
+      'מוזיאון ההיסטוריה בארמון': ['Pirita tee 56, Tallinn'],
+      'בית הקפה בארמון': ['Pirita tee 56, Tallinn'],
+      'המשך לפיריטה': ['Pirita promenade, Tallinn']
     };
     document.querySelectorAll('.micro-accordion').forEach((item) => {
       const title = item.querySelector('summary strong')?.textContent.trim();
@@ -219,9 +252,9 @@
       }
       const map = document.createElement('a');
       map.className = 'btn btn-map btn-small';
-      map.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place[1])}`;
+      map.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place[0])}`;
       map.target = '_blank';
-      map.rel = 'noopener';
+      map.rel = 'noopener noreferrer';
       map.append(icon('map'), document.createTextNode('הצג במפה'));
       row.prepend(map);
       row.querySelectorAll('.btn').forEach((action) => action.classList.add('btn-small'));
@@ -260,6 +293,66 @@
   };
 
   enhanceRoutes();
+
+  const setupRouteIndicator = () => {
+    const sections = [...document.querySelectorAll('.route-section')];
+    if (!sections.length) return;
+
+    const names = {
+      'old-town': ['R1', 'טאלין העתיקה'],
+      waterfront: ['R2', 'טאלין על המים'],
+      kadriorg: ['R3', 'קדיאורג'],
+      'modern-history': ['R4', 'טאלין של המאה ה־20']
+    };
+    const control = document.createElement('button');
+    control.className = 'floating-control route-orientation';
+    control.type = 'button';
+    control.hidden = true;
+    control.setAttribute('aria-label', 'זהות המסלול הנוכחי');
+    control.setAttribute('aria-expanded', 'false');
+    const number = document.createElement('bdi');
+    number.dir = 'ltr';
+    number.className = 'route-orientation-number';
+    const label = document.createElement('span');
+    label.className = 'route-orientation-label';
+    control.append(number, label);
+    document.body.append(control);
+
+    control.addEventListener('click', () => {
+      const expanded = !control.classList.contains('expanded');
+      control.classList.toggle('expanded', expanded);
+      control.setAttribute('aria-expanded', String(expanded));
+    });
+
+    let scheduled = false;
+    const update = () => {
+      scheduled = false;
+      const marker = (header?.getBoundingClientRect().height || 72) + 90;
+      const current = sections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= marker && rect.bottom > marker;
+      });
+      if (!current) {
+        control.hidden = true;
+        control.classList.remove('expanded');
+        control.setAttribute('aria-expanded', 'false');
+        return;
+      }
+      const [routeNumber, routeName] = names[current.id];
+      number.textContent = routeNumber;
+      label.textContent = routeName;
+      control.hidden = false;
+    };
+    const schedule = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(update);
+    };
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule);
+    update();
+  };
+  setupRouteIndicator();
 
   const mustSeeAddresses = {
     'must-01': 'Lossi plats 10, Tallinn',
@@ -348,7 +441,20 @@
   };
   loadWeather();
 
+  document.querySelectorAll('a[download][href$=".pdf"]').forEach((download) => download.addEventListener('click', () => {
+    if (download.getAttribute('aria-busy') === 'true') return;
+    download.setAttribute('aria-busy', 'true');
+    download.replaceChildren(icon('book'), document.createTextNode('מוריד…'));
+    say('ההורדה התחילה');
+    setTimeout(() => {
+      download.replaceChildren(icon('book'), document.createTextNode('הורדת PDF'));
+      download.removeAttribute('aria-busy');
+    }, 1500);
+  }));
+
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-    addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
+    addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' })
+      .then((registration) => registration.update())
+      .catch(() => {}));
   }
 })();
